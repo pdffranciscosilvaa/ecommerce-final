@@ -32,8 +32,8 @@ Sinuelo do Pampa é uma plataforma de e-commerce full-stack projetada para uma e
 
 1.  **Clonar o repositório**:
     ```bash
-    git clone [url_do_repositorio]
-    cd ecommerce-project
+    git clone https://github.com/pdffranciscosilvaa/ecommerce-final.git
+    cd ecommerce-final
     ```
 2.  **Instalar dependências do backend**:
     ```bash
