@@ -6,7 +6,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "Eduardo Corrêa Da Cruz",
+  "author": "Francisco Lisboa",
   "license": "MIT",
   "description": "Ecommerce",
   "dependencies": {

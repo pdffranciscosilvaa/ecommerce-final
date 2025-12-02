@@ -2,8 +2,8 @@
 const ENV_CONFIG = {
     // URLs do backend em diferentes ambientes
     LOCAL: 'http://localhost:3000',
-    DEVELOPMENT: 'https://seu-backend-dev.railway.app', // URL de desenvolvimento
-    PRODUCTION: 'https://seu-backend-production.railway.app' // URL de produção
+    DEVELOPMENT: 'http://localhost:3000', // Use localhost for development as well if not deployed
+    PRODUCTION: 'http://localhost:3000' // Use localhost for production if running locally
     
     // Como usar:
     // 1. Obtenha a URL do seu projeto Railway após o deploy

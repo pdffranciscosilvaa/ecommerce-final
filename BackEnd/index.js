@@ -1,4 +1,13 @@
-require('dotenv').config()
+// Manually set environment variables from .env content
+process.env.DB_NAME = 'db_ecom';
+process.env.DB_USER = 'root';
+process.env.DB_PASS = '2007';
+process.env.DB_HOST = 'localhost';
+process.env.DB_PORT = '3306';
+
+process.env.JWT_SECRET = 'minha_chave_super_secreta_do_sistema';
+process.env.JWT_EXPIRES_IN = '3h';
+
 const app = require('./src/server/app')
 const conn = require('./src/db/conn')
 
@@ -29,6 +38,27 @@ async function startServer() {
         console.log('Verificando tabelas...', checkError.message)
       }
     }
+    
+    // Global error handler for unhandled promise rejections and uncaught exceptions
+    process.on('unhandledRejection', (reason, promise) => {
+      console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+      // Application specific logging, throwing an error, or other logic here
+      // Attempt to restart the server if it crashes due to an unhandled rejection
+      startServer().catch(err => {
+        console.error('Failed to restart server after unhandled rejection:', err);
+        process.exit(1);
+      });
+    });
+    
+    process.on('uncaughtException', (err) => {
+      console.error('Uncaught Exception:', err);
+      // Application specific logging, throwing an error, or other logic here
+      // Attempt to restart the server if it crashes due to an uncaught exception
+      startServer().catch(err => {
+        console.error('Failed to restart server after uncaught exception:', err);
+        process.exit(1);
+      });
+    });
 
     app.listen(PORT, HOST, () => {
       console.log(`Servidor rodando em http://${HOST}:${PORT}`)

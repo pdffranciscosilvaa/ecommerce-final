@@ -20,9 +20,9 @@ const Produto = db.define('produto',{
         allowNull: false,
     },
     categoria: {
-        type: DataTypes.ENUM('CPU', 'GPU', 'RAM', 'Motherboard', 'SSD', 'HDD', 'PSU', 'Case', 'Cooler', 'Monitor', 'Keyboard', 'Mouse', 'Other'),
+        type: DataTypes.ENUM('BOMBA', 'BOTA', 'ESPORA', 'CHAPEU', 'CUIA', 'CHIRIPA', 'LENCO', 'PALA', 'OUTROS'),
         allowNull: false,
-        defaultValue: 'Other'
+        defaultValue: 'OUTROS'
     },
     marca: {
         type: DataTypes.STRING(50),

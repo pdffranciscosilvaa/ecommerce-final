@@ -31,16 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initApp() {
-    setupEventListeners();
-    checkAuthStatus();
+    checkAuthStatus(); // Check auth status first to update UI
     loadProducts();
+    setupEventListeners(); // Then set up event listeners
 }
 
 function setupEventListeners() {
-    searchBtn.addEventListener('click', handleSearch);
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSearch();
-    });
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
+    }
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+    }
 
     document.querySelectorAll('.nav-list a').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -53,7 +57,9 @@ function setupEventListeners() {
     cartBtn.addEventListener('click', openCart);
     document.querySelector('.cart-close').addEventListener('click', closeCart);
 
-    logoutBtn.addEventListener('click', logout);
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
 
     document.getElementById('checkoutBtn').addEventListener('click', handleCheckout);
 
@@ -125,10 +131,10 @@ function checkAuthStatus() {
 
 async function loadProducts() {
     try {
-        loading.style.display = 'block';
-        errorDiv.style.display = 'none';
-
-        const data = await apiRequest('/produto');
+        if (loading) loading.style.display = 'block';
+        if (errorDiv) errorDiv.style.display = 'none';
+ 
+         const data = await apiRequest('/produto');
         products = data;
         filteredProducts = [...products];
 
@@ -164,7 +170,7 @@ function createProductCard(product) {
         </div>
         <div class="product-info">
             <h3 class="product-name">${product.nome}</h3>
-            <span class="product-category">${product.categoria}</span>
+            <span class="product-category">${formatCategoryName(product.categoria)}</span>
             <p class="product-brand">${product.marca}</p>
             <p class="product-price">R$ ${parseFloat(product.preco).toFixed(2)}</p>
             <div class="product-actions">
@@ -179,18 +185,15 @@ function createProductCard(product) {
 
 function getProductIcon(category) {
     const icons = {
-        'CPU': 'microchip',
-        'GPU': 'tv',
-        'RAM': 'memory',
-        'Motherboard': 'chess-board',
-        'SSD': 'hdd',
-        'HDD': 'hdd',
-        'PSU': 'plug',
-        'Case': 'box',
-        'Cooler': 'fan',
-        'Monitor': 'desktop',
-        'Keyboard': 'keyboard',
-        'Mouse': 'mouse'
+        'BOMBA': 'wine-glass', // Example icon for Bomba
+        'BOTA': 'shoe-prints', // Example icon for Bota
+        'ESPORA': 'horse',     // Example icon for Espora
+        'CHAPEU': 'hat-cowboy', // Example icon for Chapéu
+        'CUIA': 'seedling',    // Example icon for Cuia
+        'CHIRIPA': 'tshirt',   // Example icon for Chiripá
+        'LENCO': 'scarf',      // Example icon for Lenço
+        'PALA': 'shield-alt',  // Example icon for Pala
+        'OUTROS': 'cog'        // Default icon
     };
     return icons[category] || 'cog';
 }
@@ -215,12 +218,52 @@ function filterByCategory(category) {
     document.querySelectorAll('.nav-list a').forEach(link => {
         link.classList.remove('active');
     });
-    document.querySelector(`[data-category="${category}"]`).classList.add('active');
+    // Ensure the category is uppercase to match the ENUM values
+    const upperCategory = category.toUpperCase();
+    document.querySelector(`[data-category="${upperCategory}"]`).classList.add('active');
 
-    if (category === 'all') {
+    if (upperCategory === 'ALL') { // Assuming 'all' might still be used as a filter option
         filteredProducts = [...products];
     } else {
-        filteredProducts = products.filter(product => product.categoria === category);
+        filteredProducts = products.filter(product => product.categoria === upperCategory);
+    }
+
+    displayProducts(filteredProducts);
+}
+
+// Helper function to format category names for display
+function formatCategoryName(category) {
+    switch (category) {
+        case 'BOMBA': return 'Bombas Chimarrão';
+        case 'BOTA': return 'Botas Tradicionalistas';
+        case 'ESPORA': return 'Esporas';
+        case 'CHAPEU': return 'Chapéu';
+        case 'CUIA': return 'Cuia';
+        case 'CHIRIPA': return 'Chiripá';
+        case 'LENCO': return 'Lenços';
+        case 'PALA': return 'Palas';
+        case 'OUTROS': return 'Outros';
+        default: return category; // Fallback for any unexpected categories
+    }
+}
+
+// Update filterByCategory to handle new category names and 'ALL' filter
+function filterByCategory(category) {
+    document.querySelectorAll('.nav-list a').forEach(link => {
+        link.classList.remove('active');
+    });
+    // Ensure the category is uppercase to match the ENUM values
+    const upperCategory = category.toUpperCase();
+    // Find the link that matches the category, or a general 'all' link if available
+    const activeLink = document.querySelector(`[data-category="${upperCategory}"]`) || document.querySelector('[data-category="ALL"]');
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+
+    if (upperCategory === 'ALL') {
+        filteredProducts = [...products];
+    } else {
+        filteredProducts = products.filter(product => product.categoria === upperCategory);
     }
 
     displayProducts(filteredProducts);
@@ -306,16 +349,24 @@ async function handleCheckout() {
 }
 
 function updateUI() {
+    // Ensure adminPanel is available before proceeding
+    if (!adminPanel) {
+        console.warn("Admin panel element not found in the DOM.");
+        return;
+    }
+
     if (currentUser) {
         loginLink.style.display = 'none';
         userInfo.style.display = 'flex';
         userName.textContent = `Olá, ${currentUser.nome} (${currentUser.tipo_usuario})`;
-
-        if (currentUser.tipo_usuario === 'ADMIN') {
-            adminPanel.style.display = 'block';
-        }
-    } else {
-        loginLink.style.display = 'inline';
+ 
+         if (currentUser.tipo_usuario === 'ADMIN') {
+             if (adminPanel) { // Check if adminPanel exists
+                 adminPanel.style.display = 'block';
+             }
+         }
+     } else {
+         loginLink.style.display = 'inline';
         userInfo.style.display = 'none';
         adminPanel.style.display = 'none';
     }
@@ -466,7 +517,7 @@ async function handleContactForm(e) {
             from_email: email,
             subject: subject,
             message: message,
-            to_email: 'eduardo_c_cruz@estudante.sesisenai.org.br'
+            to_email: 'francisco_ls_lima@estudante.sesisenai.org.br'
         };
 
         // Send email using EmailJS
