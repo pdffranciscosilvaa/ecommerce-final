@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="shortcut icon" href="./image/favicon.png" type="image/x-icon">
+    <script src="./js/app.js" defer></script>
+    <script src="./js/ui-effects.js" defer></script>
+
+    <title>Sinuelo do Pampa - Artigos Gaúchos</title>
+</head>
+<body>
+    <!-- SWITCH GLOBAL (MODOS)
+<div class="ui-switcher">
+    <button id="toggleHeroMode">Imagem ↔ Vídeo</button>
+    <button id="toggleBusinessMode">B2C ↔ B2B</button>
+</div> -->
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><img src="./image/sinueloDoPampa.png" width="40px" height="30px">Sinuelo do Pampa - Artigos Gaúchos</h1>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar produtos...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <button id="cartBtn" class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cartCount">0</span>
+                    </button>
+                    <div class="user-menu">
+                        <a href="./html/login.html" id="loginLink">Login</a>
+                        <div id="userInfo" class="user-info" style="display: none;">
+                            <span id="userName"></span>
+                            <button id="logoutBtn">Sair</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-list">
+                 <li><a href="#" data-category="BOMBA">Bombas Chimarrão</a></li>
+                        <li><a href="#" data-category="BOTA">Botas tradicionalistas</a></li>
+                        <li><a href="#" data-category="ESPORA">Esporas</a></li>
+                        <li><a href="#" data-category="CHAPEU">Chapéu</a></li>
+                        <li><a href="#" data-category="CUIA">Cuia</a></li>
+                        <li><a href="#" data-category="CHIRIPA">Chiripá</a></li>
+                        <li><a href="#" data-category="LENCO">Lenços</a></li>
+                        <li><a href="#" data-category="PALA">Palas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+   <section class="hero hero-image" id="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="./video/hero.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <div class="hero-content animated">
+            <h2>Os melhores artigos Gaúchos para você!</h2>
+            <p>Encontre peças para seu traje, ou componentes para sua hora do mate!</p>
+            <button class="cta-btn" onclick="scrollToProducts()">Ver Produtos</button>
+        </div>
+    </div>
+</section>
+
+
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Produtos em Destaque</h2>
+            <div class="products-grid" id="productsGrid">
+            </div>
+            <div class="loading" id="loading">Carregando produtos...</div>
+            <div class="error" id="error" style="display: none;"></div>
+        </div>
+    </section>
+
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Carrinho</h3>
+            <span class="cart-close">&times;</span>
+        </div>
+        <div class="cart-body" id="cartItems">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: R$ <span id="cartTotal">0.00</span></strong>
+            </div>
+            <button id="checkoutBtn" class="checkout-btn">Finalizar</button>
+        </div>
+    </div>
+
+    <div id="adminPanel" style="display: none">
+        <button id="adminBtn" class="admin-btn">Painel Admin</button>
+    </div>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Fale Conosco</h3>
+                    <p>Tem alguma dúvida ou sugestão? Entre em contato conosco!</p>
+                    <div class="contact-details">
+                        <p><i class="fas fa-envelope"></i> franciscolisboalima14@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> (48) 99853-9413</p>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="contact-btn">Enviar Mensagem</button>
+                </form>
+            </div>
+            <div id="contactResponse" class="contact-response"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sinuelo do Pampa</h4>
+                    <p>Os melhores artigos Gaúchos para você!</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#" data-category="BOMBA">Bombas Chimarrão</a></li>
+                        <li><a href="#" data-category="BOTA">Botas tradicionalistas</a></li>
+                        <li><a href="#" data-category="ESPORA">Esporas</a></li>
+                        <li><a href="#" data-category="CHAPEU">Chapéu</a></li>
+                        <li><a href="#" data-category="CUIA">Cuia</a></li>
+                        <li><a href="#" data-category="CHIRIPA">Chiripá</a></li>
+                        <li><a href="#" data-category="LENCO">Lenços</a></li>
+                        <li><a href="#" data-category="PALA">Palas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p><i class="fas fa-envelope"></i> franciscolisboalima14@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> (48) 99853-9413</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sinuelo do Pampa. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

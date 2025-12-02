@@ -1,0 +1,446 @@
+/* --------------------------------------------- */
+/*   SINUELO DO PAMPA — Gaúcho Elegante (Premium) */
+/* --------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+:root{
+  --bg:#11100f;           /* fundo escuro */
+  --panel:#1f1b18;        /* painéis mais claros */
+  --muted:#bdb2a7;        /* texto secundário */
+  --accent:#cba94a;       /* dourado discreto */
+  --brand:#7b1515;        /* vermelho gaúcho (suavizado) */
+  --success:#1f7a3a;      /* verde para atacado/labels */
+  --glass: rgba(255,255,255,0.03);
+  --radius:12px;
+  --shadow: 0 8px 24px rgba(2,2,2,0.6);
+}
+
+/* Reset simples */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+  background: linear-gradient(180deg,var(--bg) 0%, #0f0e0d 100%);
+  color:#efe9e1;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* Container utilitário */
+.container{max-width:1180px;margin:0 auto;padding:0 18px;}
+
+/* Header — limpo e elegante */
+.header{
+  position:sticky; top:0; z-index:999;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  box-shadow:0 6px 18px rgba(0,0,0,0.6);
+}
+
+.header-content{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:14px 0;
+}
+
+.logo h1{
+  display:flex; align-items:center; gap:12px;
+  font-family:'Playfair Display', serif;
+  font-size:18px; font-weight:700;
+  color:var(--accent);
+  margin:0;
+}
+.logo img{width:44px;height:34px;border-radius:6px;object-fit:cover;}
+
+/* Search compact elegante */
+.search-bar{
+  display:flex; align-items:center; gap:8px;
+  background:var(--glass); padding:8px; border-radius:999px;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.search-bar input{
+  background:transparent; border:none; outline:none;
+  color:#fff; width:220px; font-size:14px;
+}
+.search-bar button{
+  border:none; background:transparent; color:var(--accent); cursor:pointer;
+  font-size:16px; padding:6px;
+}
+
+/* Header actions */
+.header-actions{display:flex;align-items:center;gap:10px}
+.cart-btn{
+  background:transparent;border:1px solid rgba(255,255,255,0.04);
+  padding:10px 12px;border-radius:10px;color:var(--muted);cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;position:relative;
+}
+.cart-btn:hover{border-color:rgba(203,169,74,0.35);color:var(--accent)}
+#cartCount{
+  position:absolute; top:-6px; right:-6px; background:var(--accent);
+  color:#1a120e; font-weight:700; padding:3px 7px; border-radius:999px;
+  font-size:12px; box-shadow:0 4px 10px rgba(0,0,0,0.6);
+}
+
+/* Nav discreto */
+.nav{
+  background:transparent; padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,0.02);
+}
+.nav-list{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;list-style:none;padding:8px 0;margin:0}
+.nav-list a{
+  color:var(--muted); text-decoration:none; font-weight:600; font-size:13px;
+  padding:6px 10px; border-radius:8px; transition:all .18s;
+}
+.nav-list a:hover{color:var(--accent); background:rgba(203,169,74,0.04); transform:translateY(-2px)}
+.nav-list a.active-category{color:var(--accent); box-shadow:0 6px 18px rgba(203,169,74,0.06);}
+
+/* Hero pequeno e sofisticado */
+.hero{
+  padding:56px 0; text-align:center; margin-bottom:8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.06), transparent);
+}
+.hero-content h2{
+  font-family:'Playfair Display',serif; font-size:34px; margin:0 0 8px; color:#fff;
+}
+.hero-content p{color:var(--muted); margin-bottom:14px}
+.cta-btn{
+  background:transparent; border:1px solid rgba(203,169,74,0.12);
+  color:var(--accent); padding:10px 18px; border-radius:10px; cursor:pointer;
+  transition:all .2s; font-weight:700;
+}
+.cta-btn:hover{transform:translateY(-4px); box-shadow:var(--shadow)}
+
+/* Produtos */
+.products{padding:40px 0}
+.section-title{
+  text-align:center; font-family:'Playfair Display',serif; font-size:26px;
+  margin-bottom:26px; color:#f6efe6;
+}
+
+/* Grid moderno */
+.products-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+/* Card premium */
+.product-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(255,255,255,0.02);
+  position:relative;
+  overflow:hidden;
+  transition:transform .28s ease, box-shadow .28s ease, border-color .28s;
+  display:flex; flex-direction:column; gap:10px;
+}
+.product-card:hover{
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  border-color: rgba(203,169,74,0.14);
+}
+
+/* Imagem com moldura */
+.product-card img{
+  width:100%; height:180px; object-fit:cover; border-radius:10px;
+  border:1px solid rgba(255,255,255,0.02);
+}
+
+/* Conteúdo */
+.product-card h3{
+  font-size:16px; margin:0; color:#fff; font-weight:700; font-family:'Playfair Display',serif;
+}
+.product-meta{display:flex; justify-content:space-between; align-items:center; gap:10px}
+.price{font-size:16px; font-weight:800; color:var(--brand)}
+.old-price{font-size:13px; color:rgba(255,255,255,0.35); text-decoration:line-through}
+
+/* Botoes */
+.add-btn{
+  margin-top:auto;
+  background: linear-gradient(90deg, rgba(203,169,74,0.18), rgba(203,169,74,0.06));
+  color:var(--accent); border:none; padding:12px 14px; border-radius:10px;
+  cursor:pointer; font-weight:700; transition:transform .18s;
+}
+.add-btn:hover{transform:translateY(-4px); box-shadow:0 8px 20px rgba(203,169,74,0.06)}
+
+/* Badge B2B discreto */
+.badge-b2b{
+  position:absolute; left:12px; top:12px; background:rgba(31,122,58,0.12);
+  color:var(--success); border:1px solid rgba(31,122,58,0.12); padding:6px 8px;
+  border-radius:999px; font-size:12px; font-weight:700; backdrop-filter: blur(4px);
+}
+
+/* Visual B2B (preço atacado) */
+.price-b2b{
+  display:block; margin-top:6px; font-size:13px; color:var(--success); font-weight:800;
+}
+
+/* Cart sidebar (mantive seletores existentes) */
+.cart-sidebar{
+  width:360px; right:-420px; position:fixed; top:0; height:100%;
+  background:linear-gradient(180deg, var(--panel), rgba(15,12,10,0.98));
+  box-shadow:-20px 0 60px rgba(0,0,0,0.6); padding:22px; transition:right .36s ease;
+  border-left:1px solid rgba(255,255,255,0.03); z-index:9999;
+}
+.cart-sidebar.open{ right:0 }
+
+/* Contact / Footer */
+.contact{ background:transparent; padding:48px 0; color:var(--muted) }
+.footer{ background:transparent; padding:36px 0; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02) }
+
+/* Small helpers */
+.hidden{display:none}
+.center{display:flex;align-items:center;justify-content:center}
+
+/* Efeitos: shake / fade-in */
+@keyframes shakeX{ 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 50%{transform:translateX(6px)} 75%{transform:translateX(-4px)} }
+.shake{ animation: shakeX .6s cubic-bezier(.36,.07,.19,.97) }
+.fade-in{ animation: fadeInUp .6s ease forwards }
+@keyframes fadeInUp{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
+
+/* Responsividade */
+@media (max-width:900px){
+  .search-bar input{width:140px}
+  .product-card img{height:160px}
+}
+@media (max-width:600px){
+  .header-content{flex-direction:column; gap:10px}
+  .nav-list{gap:10px}
+  .products-grid{grid-template-columns:repeat(1,1fr)}
+}
+
+/* ----------------------------------------------------------- */
+/*                    HERO UNIVERSAL                           */
+/* ----------------------------------------------------------- */
+
+.hero{
+  position:relative;
+  width:100%;
+  min-height:460px;
+  padding:110px 20px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+  color:#fff;
+
+  overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* ----------------------------------------------------------- */
+/*                    MODO — IMAGEM DE FUNDO                   */
+/* ----------------------------------------------------------- */
+
+.hero-image{
+  background-image:url('../image/wallpaper_fundo.png');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+/* ----------------------------------------------------------- */
+/*                    MODO — VÍDEO DE FUNDO                    */
+/* ----------------------------------------------------------- */
+
+.hero-video video,
+.hero-video .hero-video {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  filter:brightness(0.45);
+  pointer-events:none;
+}
+
+/* Vídeo invisível quando não usado */
+.hero-image .hero-video {
+  display:none;
+}
+
+/* ----------------------------------------------------------- */
+/*                        OVERLAY                              */
+/* ----------------------------------------------------------- */
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+      145deg,
+      rgba(0,0,0,0.90),
+      rgba(0,0,0,0.55) 40%,
+      rgba(0,0,0,0.45) 70%,
+      rgba(0,0,0,0.75)
+  );
+  z-index:1;
+  animation: overlayDrift 12s ease-in-out infinite;
+}
+
+/* Animação leve “respirando” */
+@keyframes overlayDrift {
+  0% {opacity:.85; transform:scale(1);}
+  50% {opacity:.93; transform:scale(1.03);}
+  100% {opacity:.85; transform:scale(1);}
+}
+
+/* Transição suave para o site */
+.hero::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height:150px;
+  background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #11100f 100%);
+  z-index:2;
+}
+
+/* ----------------------------------------------------------- */
+/*                    CONTEÚDO DO HERO                         */
+/* ----------------------------------------------------------- */
+
+.hero-content{
+  position:relative;
+  z-index:10;
+  max-width:900px;
+  padding:0 16px;
+}
+
+.hero-content h2{
+  font-family:'Playfair Display', serif;
+  font-size:48px;
+  margin:0 0 18px;
+  line-height:1.15;
+}
+
+.hero-content p{
+  font-size:19px;
+  max-width:760px;
+  margin:0 auto 28px;
+  color:#e9e3d8;
+}
+
+.cta-btn{
+  background:#ffd300;
+  color:#1f1b18;
+  padding:14px 32px;
+  border-radius:60px;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+  font-size:18px;
+  transition:.28s;
+}
+
+.cta-btn:hover{
+  background:#ffb700;
+  transform:translateY(-4px);
+}
+
+/* ----------------------------------------------------------- */
+/*                     RESPONSIVIDADE                          */
+/* ----------------------------------------------------------- */
+
+@media (max-width:900px){
+  .hero-content h2{font-size:38px}
+  .hero-content p{font-size:17px}
+}
+
+@media (max-width:600px){
+  .hero{padding:80px 16px}
+  .hero-content h2{font-size:30px}
+  .hero-content p{font-size:15px}
+  .cta-btn{font-size:15px;padding:12px 26px}
+}
+
+@media (max-width:420px){
+  .hero-content h2{font-size:26px}
+  .hero-content p{font-size:14px}
+  .cta-btn{padding:10px 22px;font-size:14px}
+}
+
+
+.ui-switcher{
+    position:fixed;
+    top:12px;
+    right:12px;
+    z-index:99999;
+    display:flex;
+    gap:10px;
+}
+
+.ui-switcher button{
+    background:rgba(0,0,0,0.55);
+    border:1px solid rgba(255,255,255,0.18);
+    padding:8px 14px;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    backdrop-filter:blur(6px);
+    transition:.25s;
+}
+
+.ui-switcher button:hover{
+    background:rgba(255,255,255,0.15);
+}
+
+.animated{
+    opacity:0;
+    animation:fadeInUpHero .9s ease forwards;
+}
+
+@keyframes fadeInUpHero{
+    0%{opacity:0; transform:translateY(22px);}
+    100%{opacity:1; transform:translateY(0);}
+}
+
+
+/* Hero com vídeo */
+.hero-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    filter:brightness(0.65);
+    display:none;
+}
+
+.hero-video.active{
+    display:block;
+}
+
+/* Quando no modo imagem */
+.hero-image .hero-video{
+    display:none;
+}
+
+/* Quando no modo vídeo */
+.hero-video-mode .hero-video{
+    display:block;
+}
+
+.hero-darken{
+    filter:brightness(0.45) contrast(1.06);
+    transition:filter .2s linear;
+}
+
+
+/* Modo B2B = verde */
+body.b2b{
+    --accent:#20c95a;
+    --brand:#15803d;
+}
+
+/* Modo B2C = mantém suas cores originais */
