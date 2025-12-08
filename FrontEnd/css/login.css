@@ -1,0 +1,159 @@
+/* --------------------------------------------- */
+/*     LOGIN — Estilo Premium Sinuelo do Pampa   */
+/* --------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+:root{
+  --bg:#11100f;
+  --panel:#1f1b18;
+  --muted:#c9bfb4;
+  --accent:#cba94a;
+  --brand:#7b1515;
+  --glass: rgba(255,255,255,0.04);
+  --radius:14px;
+  --shadow:0 8px 24px rgba(0,0,0,0.7);
+}
+
+/* Fundo tela inteira */
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(180deg,var(--bg) 0%, #0f0e0d 100%);
+  color:#fff;
+  font-family:Inter,system-ui;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* Container principal */
+.auth-container-log{
+    width:100%;
+    max-width:420px;
+    padding:16px;
+    animation:fadeIn .8s ease forwards;
+}
+
+/* Cartão */
+.auth-card{
+    background:var(--panel);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter:blur(6px);
+}
+
+/* Header */
+.auth-header{
+    text-align:center;
+    margin-bottom:24px;
+}
+
+.auth-header h1{
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    margin:0 0 8px;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.auth-header p{
+    margin:0;
+    font-size:14px;
+    color:var(--muted);
+}
+
+/* Formulário */
+.auth-form .form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:18px;
+}
+
+.form-group label{
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:6px;
+}
+
+.form-group input{
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:var(--glass);
+    color:#fff;
+    outline:none;
+    font-size:15px;
+    transition:.25s;
+}
+
+.form-group input:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 2px rgba(203,169,74,0.25);
+}
+
+/* Botão principal */
+.btn-primary{
+    width:100%;
+    background:linear-gradient(90deg, rgba(203,169,74,0.25), rgba(203,169,74,0.12));
+    color:var(--accent);
+    border:none;
+    border-radius:10px;
+    padding:14px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.28s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(203,169,74,0.12);
+}
+
+/* Links */
+.auth-links{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.auth-links a{
+    color:var(--accent);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.auth-links a:hover{
+    text-decoration:underline;
+}
+
+/* Mensagem */
+.message{
+    margin-top:18px;
+    text-align:center;
+    font-size:14px;
+    color:var(--accent);
+}
+
+/* Animação fade */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(14px)}
+    to{opacity:1; transform:translateY(0)}
+}
+
+/* Responsivo */
+@media(max-width:420px){
+    .auth-card{
+        padding:26px 22px;
+    }
+    .auth-header h1{
+        font-size:20px;
+    }
+}
